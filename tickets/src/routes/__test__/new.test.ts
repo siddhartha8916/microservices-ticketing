@@ -4,6 +4,7 @@ import { Ticket } from "../../models/tickets";
 
 describe("Testing Creating a New Ticket", () => {
   describe("Test POST /api/tickets/new", () => {
+    
     test("Has a route handler for /api/tickets for POST Requests", async () => {
       const res = await request(app).post("/api/tickets").send({});
       expect(res.status).not.toEqual(404);
