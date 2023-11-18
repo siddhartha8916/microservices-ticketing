@@ -14,13 +14,20 @@ spec:
     spec:
       containers:
         - name: auth
-          image: us.gcr.io/ticketing-dev-404114/auth    # Same as skaffold.yaml file
+          image: us.gcr.io/ticketing-dev-404114/ticketing-auth    # Same as skaffold.yaml file
           env: 
+            - name: MONGO_URI # Name of the environment variable which we can refer from inside of the service
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
             - name: JWT_SECRET                          # Name of the environment variable which we can refer from inside of the service
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret                      # Name of the running secret service
                   key: jwt_key
+            - name: NODE_ENV                          # Name of the environment variable which we can refer from inside of the service
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret                      # Name of the running secret service
+                  key: node_env
 
 
 ---

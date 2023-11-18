@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 import { Password } from "../utils/password";
 
 // An interface that describes the properties that are required to create a user
-interface UserProps {
+interface UserDoc {
   email: string;
   password: string;
 }
 
 // An interface that describes the properties that a User Model has
-interface UserModelProps extends mongoose.Model<any> {
-  build(user: UserProps): UserDocumentProps;
+interface UserModelProps extends mongoose.Model<UserDoc> {
+  build(user: UserDoc): UserDocumentProps;
 }
 
 // An interface that describes what properties that a single User Document has
@@ -55,7 +55,7 @@ userSchema.pre("save", async function (done) {
 //   email:"test@test.com",
 //   password:"asdfsd"
 // })
-userSchema.statics.build = (user: UserProps) => {
+userSchema.statics.build = (user: UserDoc) => {
   return new User(user);
 };
 

@@ -11,11 +11,27 @@ build:
     projectId: ticketing-dev-404114
   artifacts:
     # - image: sidd6916/auth
-    - image: us.gcr.io/ticketing-dev-404114/auth
+    - image: us.gcr.io/ticketing-dev-404114/ticketing-auth
       context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
+            dest: .
+    - image: us.gcr.io/ticketing-dev-404114/ticketing-tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: us.gcr.io/ticketing-dev-404114/ticketing-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
             dest: .
